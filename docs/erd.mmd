@@ -1,0 +1,10 @@
+erDiagram
+    ROLES ||--o{ USERS : has
+    USERS ||--o{ ORDERS : places
+    USERS ||--o{ REVIEWS : writes
+    PRODUCTS ||--o{ REVIEWS : receives
+    ROLES { int id PK string name }
+    USERS { int id PK string name string email string password_hash int role_id FK }
+    PRODUCTS { int id PK string name string category decimal price int stock }
+    ORDERS { int id PK int user_id FK decimal total string status json items_json }
+    REVIEWS { int id PK int user_id FK int product_id FK int rating string comment }
