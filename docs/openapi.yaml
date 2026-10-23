@@ -1,0 +1,58 @@
+openapi: 3.0.3
+info:
+  title: Watchly API
+  version: 1.0.0
+servers:
+  - url: /api
+paths:
+  /health:
+    get:
+      summary: API health check
+      responses:
+        '200':
+          description: API is running
+  /products:
+    get:
+      summary: List products
+      responses:
+        '200':
+          description: Product list
+    post:
+      summary: Create product (admin)
+      security:
+        - bearerAuth: []
+      responses:
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+  /auth/register:
+    post:
+      summary: Register
+      responses:
+        '201':
+          description: Account created
+  /auth/login:
+    post:
+      summary: Login and receive JWT
+      responses:
+        '200':
+          description: Logged in
+        '401':
+          description: Invalid credentials
+  /exchange-rate:
+    get:
+      summary: Get EUR to BAM exchange rate from external API
+      responses:
+        '200':
+          description: Exchange rate
+        '503':
+          description: External API unavailable
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

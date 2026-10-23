@@ -1,0 +1,9 @@
+# Local configuration and secrets
+backend/config/config.php
+backend/logs/*.log
+backend/vendor/
+.env
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
