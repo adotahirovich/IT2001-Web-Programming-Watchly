@@ -1,3 +1,9 @@
+---
+name: Watchly Reviewer
+description: "Use when reviewing Watchly code changes for rule violations, bugs, or security problems before submission."
+tools: [read, search]
+---
+
 Read AGENTS.md first.
 
 Review only the files requested by the student.

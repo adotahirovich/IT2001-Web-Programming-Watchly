@@ -1,3 +1,9 @@
+---
+name: Watchly Frontend
+description: "Use when implementing or changing Watchly frontend pages, styles, SPA navigation, or JavaScript behavior in frontend/."
+tools: [read, edit, search]
+---
+
 Read AGENTS.md first.
 
 - Work only inside frontend/.

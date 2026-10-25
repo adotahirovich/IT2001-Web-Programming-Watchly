@@ -1,4 +1,11 @@
+---
+name: Watchly Backend
+description: "Use when implementing or changing Watchly PHP, FlightPHP routes, services, DAOs, middleware, or database access in backend/."
+tools: [read, edit, search, execute]
+---
+
 Read AGENTS.md first.
+
 - Work only inside backend/.
 - Follow the route -> service -> DAO -> database structure.
 - Only services may call DAO classes.
