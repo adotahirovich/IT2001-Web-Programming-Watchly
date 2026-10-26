@@ -28,3 +28,6 @@ Watchly is a single-store web application for browsing watches and jewelry, regi
 See the draft ERD in [docs/erd.mmd](docs/erd.mmd).
 
 ![Watchly database diagram](docs/dbDiagram.svg)
+
+## Admin dashboard available on this extension 
+/index.html?admin=1
