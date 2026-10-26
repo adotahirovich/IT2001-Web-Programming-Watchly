@@ -1,21 +1,21 @@
 <section id="page-external-api" class="page-section d-none">
             <div class="card border-0 shadow-sm p-4">
-                <h3 class="fw-bold mb-3"><i class="fa-solid fa-coins me-2 text-warning"></i>Kalkulator i Konverzija Valuta (Frankfurter API)</h3>
-                <p class="text-muted">Prikaz cijena artikala u različitim valutama preuzetim sa eksternog API-ja.</p>
+                <h3 class="fw-bold mb-3"><i class="fa-solid fa-coins me-2 text-warning"></i>Currency Converter (Frankfurter API)</h3>
+                <p class="text-muted">View product prices in different currencies using exchange rates from an external API.</p>
                 
                 <div class="row align-items-center my-3">
                     <div class="col-md-4">
-                        <label class="form-label font-weight-bold">Odaberi valutu za prikaz cijena:</label>
+                        <label class="form-label fw-bold">Choose a currency:</label>
                         <select class="form-select" id="currency-select" onchange="convertPrices(this.value)">
-                            <option value="EUR" selected>EUR (€) - Osnovna valuta</option>
+                            <option value="EUR" selected>EUR (€) - Base currency</option>
                             <option value="USD">USD ($)</option>
                             <option value="GBP">GBP (£)</option>
-                            <option value="CHF">CHF (CHF)</option>
+                            <option value="CHF">CHF</option>
                         </select>
                     </div>
                     <div class="col-md-8">
                         <div class="alert alert-info mb-0 mt-3 mt-md-0" id="currency-status">
-                            <i class="fa-solid fa-info-circle me-1"></i> Trenutni kurs: <strong>1 EUR = 1 EUR</strong> (Podaci će se učitavati preko REST backend-a u M3).
+                            <i class="fa-solid fa-info-circle me-1"></i> Current rate: <strong>1 EUR = 1 EUR</strong> (Live rates will be connected in a later milestone.)
                         </div>
                     </div>
                 </div>
