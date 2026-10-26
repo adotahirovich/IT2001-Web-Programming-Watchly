@@ -37,7 +37,7 @@
   <text class="relation-label" x="605" y="397">owns</text>
 
   <path class="relation" d="M330 555 H440" marker-start="url(#one)" marker-end="url(#many)"/>
-  <text class="relation-label" x="385" y="541" text-anchor="middle">contains</text>
+  <text class="relation-label" x="385" y="541" text-anchor="middle">appears in</text>
 
   <path class="relation" d="M740 260 H800 V430 H1010 V470" marker-start="url(#one)" marker-end="url(#many)"/>
   <text class="relation-label" x="890" y="414" text-anchor="middle">writes</text>

@@ -1,5 +1,5 @@
 %% Compact reference version; matches the rendered ERD below.
-%% Relationships: ROLES ||--o{ USERS : has; USERS ||--o{ CART : owns; PRODUCTS ||--o{ CART : contains; USERS ||--o{ ORDERS : places; USERS ||--o{ REVIEWS : writes; PRODUCTS ||--o{ REVIEWS : receives
+%% Relationships: ROLES ||--o{ USERS : has; USERS ||--o{ CART : owns; PRODUCTS ||--o{ CART : appears_in; USERS ||--o{ ORDERS : places; USERS ||--o{ REVIEWS : writes; PRODUCTS ||--o{ REVIEWS : receives
 %% ROLES: int id PK, string name
 %% USERS: int id PK, string name, string email, string password_hash, int role_id FK
 %% PRODUCTS: int id PK, string name, string category, decimal price, int stock
@@ -10,7 +10,7 @@
 erDiagram
     ROLES ||--o{ USERS : has
     USERS ||--o{ CART : owns
-    PRODUCTS ||--o{ CART : contains
+    PRODUCTS ||--o{ CART : appears_in
     USERS ||--o{ ORDERS : places
     USERS ||--o{ REVIEWS : writes
     PRODUCTS ||--o{ REVIEWS : receives
