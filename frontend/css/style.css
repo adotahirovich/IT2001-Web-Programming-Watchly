@@ -1,0 +1,36 @@
+body {
+font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+background-color: #f8f9fa;
+color: #212529;
+}
+
+.tracking-wider {
+letter-spacing: 1.5px;
+}
+
+.hero-banner {
+background: linear-gradient(135deg, #111827 0%, #1f2937 100%);
+border-left: 5px solid #ffc107;
+}
+
+.product-card {
+transition: transform 0.2s ease-in-out, shadow 0.2s ease-in-out;
+}
+
+.product-card:hover {
+transform: translateY(-5px);
+box-shadow: 0 10px 20px rgba(0,0,0,0.1) !important;
+}
+
+.feature-icon {
+transition: transform 0.3s ease;
+}
+
+.card:hover .feature-icon {
+transform: scale(1.1);
+}
+
+.nav-item-link.active {
+color: #ffc107 !important;
+font-weight: 600;
+}

@@ -1,0 +1,61 @@
+%% Compact reference version; matches the rendered ERD below.
+%% Relationships: ROLES ||--o{ USERS : has; USERS ||--o{ CART : owns; PRODUCTS ||--o{ CART : appears_in; USERS ||--o{ ORDERS : places; USERS ||--o{ REVIEWS : writes; PRODUCTS ||--o{ REVIEWS : receives
+%% ROLES: int id PK, string name
+%% USERS: int id PK, string name, string email, string password_hash, int role_id FK
+%% PRODUCTS: int id PK, string name, string category, decimal price, int stock
+%% CART: int id PK, int user_id FK, int product_id FK, int quantity
+%% ORDERS: int id PK, int user_id FK, decimal total, string status, json items_json, datetime created_at
+%% REVIEWS: int id PK, int user_id FK, int product_id FK, int rating, string comment
+
+erDiagram
+    ROLES ||--o{ USERS : has
+    USERS ||--o{ CART : owns
+    PRODUCTS ||--o{ CART : appears_in
+    USERS ||--o{ ORDERS : places
+    USERS ||--o{ REVIEWS : writes
+    PRODUCTS ||--o{ REVIEWS : receives
+
+    ROLES {
+        int id PK
+        string name
+    }
+
+    USERS {
+        int id PK
+        string name
+        string email
+        string password_hash
+        int role_id FK
+    }
+
+    PRODUCTS {
+        int id PK
+        string name
+        string category
+        decimal price
+        int stock
+    }
+
+    CART {
+        int id PK
+        int user_id FK
+        int product_id FK
+        int quantity
+    }
+
+    ORDERS {
+        int id PK
+        int user_id FK
+        decimal total
+        string status
+        json items_json
+        datetime created_at
+    }
+
+    REVIEWS {
+        int id PK
+        int user_id FK
+        int product_id FK
+        int rating
+        string comment
+    }

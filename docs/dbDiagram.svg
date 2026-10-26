@@ -1,0 +1,110 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="880" viewBox="0 0 1200 880" role="img" aria-labelledby="title description">
+  <title id="title">Watchly Entity Relationship Diagram</title>
+  <desc id="description">Six entities and the relationships defined in erd.mmd.</desc>
+  <defs>
+    <style>
+      .background { fill: #f4f6f8; }
+      .card { fill: #ffffff; stroke: #263445; stroke-width: 2; }
+      .header { fill: #263445; }
+      .entity { fill: #ffffff; font: 700 19px Arial, sans-serif; letter-spacing: 1px; }
+      .field { fill: #263445; font: 16px Arial, sans-serif; }
+      .key { fill: #a35a00; font-weight: 700; }
+      .relation { fill: none; stroke: #52677d; stroke-width: 2.5; }
+      .relation-label { fill: #263445; font: 14px Arial, sans-serif; }
+      .cardinality { fill: #a35a00; font: 700 14px Arial, sans-serif; }
+      .title { fill: #172332; font: 700 28px Arial, sans-serif; }
+      .subtitle { fill: #52677d; font: 15px Arial, sans-serif; }
+    </style>
+    <marker id="one" markerWidth="12" markerHeight="14" refX="2" refY="7" orient="auto">
+      <path d="M2 1 V13 M7 1 V13" stroke="#52677d" stroke-width="1.7" fill="none"/>
+    </marker>
+    <marker id="many" markerWidth="14" markerHeight="14" refX="12" refY="7" orient="auto">
+      <path d="M2 1 L12 7 L2 13 M2 7 H12" stroke="#52677d" stroke-width="1.7" fill="none"/>
+    </marker>
+  </defs>
+
+  <rect class="background" width="1200" height="880"/>
+  <text class="title" x="40" y="42">Watchly — Entity Relationship Diagram</text>
+  <text class="subtitle" x="40" y="68">Draft database plan · 1 = one, N = many</text>
+
+  <path class="relation" d="M310 160 H440" marker-start="url(#one)" marker-end="url(#many)"/>
+  <text class="relation-label" x="355" y="146" text-anchor="middle">has</text>
+
+  <path class="relation" d="M740 160 H870" marker-start="url(#one)" marker-end="url(#many)"/>
+  <text class="relation-label" x="805" y="146" text-anchor="middle">places</text>
+
+  <path class="relation" d="M590 320 V470" marker-start="url(#one)" marker-end="url(#many)"/>
+  <text class="relation-label" x="605" y="397">owns</text>
+
+  <path class="relation" d="M330 555 H440" marker-start="url(#one)" marker-end="url(#many)"/>
+  <text class="relation-label" x="385" y="541" text-anchor="middle">appears in</text>
+
+  <path class="relation" d="M740 260 H800 V430 H1010 V470" marker-start="url(#one)" marker-end="url(#many)"/>
+  <text class="relation-label" x="890" y="414" text-anchor="middle">writes</text>
+
+  <path class="relation" d="M180 700 V790 H1010 V700" marker-start="url(#one)" marker-end="url(#many)"/>
+  <text class="relation-label" x="595" y="779" text-anchor="middle">receives</text>
+
+  <g aria-label="ROLES entity">
+    <rect class="card" x="40" y="100" width="270" height="120" rx="6"/>
+    <path class="header" d="M46 100 H304 Q310 100 310 106 V140 H40 V106 Q40 100 46 100 Z"/>
+    <text class="entity" x="58" y="127">ROLES</text>
+    <text class="field" x="58" y="170"><tspan class="key">PK</tspan><tspan>  id : int</tspan></text>
+    <text class="field" x="58" y="198">name : string</text>
+  </g>
+
+  <g aria-label="USERS entity">
+    <rect class="card" x="440" y="90" width="300" height="230" rx="6"/>
+    <path class="header" d="M446 90 H734 Q740 90 740 96 V130 H440 V96 Q440 90 446 90 Z"/>
+    <text class="entity" x="458" y="117">USERS</text>
+    <text class="field" x="458" y="160"><tspan class="key">PK</tspan><tspan>  id : int</tspan></text>
+    <text class="field" x="458" y="190">name : string</text>
+    <text class="field" x="458" y="220">email : string</text>
+    <text class="field" x="458" y="250">password_hash : string</text>
+    <text class="field" x="458" y="280"><tspan class="key">FK</tspan><tspan>  role_id : int</tspan></text>
+  </g>
+
+  <g aria-label="ORDERS entity">
+    <rect class="card" x="870" y="90" width="290" height="230" rx="6"/>
+    <path class="header" d="M876 90 H1154 Q1160 90 1160 96 V130 H870 V96 Q870 90 876 90 Z"/>
+    <text class="entity" x="888" y="117">ORDERS</text>
+    <text class="field" x="888" y="160"><tspan class="key">PK</tspan><tspan>  id : int</tspan></text>
+    <text class="field" x="888" y="190"><tspan class="key">FK</tspan><tspan>  user_id : int</tspan></text>
+    <text class="field" x="888" y="220">total : decimal</text>
+    <text class="field" x="888" y="250">status : string</text>
+    <text class="field" x="888" y="280">items_json : json</text>
+    <text class="field" x="888" y="310">created_at : datetime</text>
+  </g>
+
+  <g aria-label="PRODUCTS entity">
+    <rect class="card" x="40" y="470" width="290" height="200" rx="6"/>
+    <path class="header" d="M46 470 H324 Q330 470 330 476 V510 H40 V476 Q40 470 46 470 Z"/>
+    <text class="entity" x="58" y="497">PRODUCTS</text>
+    <text class="field" x="58" y="540"><tspan class="key">PK</tspan><tspan>  id : int</tspan></text>
+    <text class="field" x="58" y="570">name : string</text>
+    <text class="field" x="58" y="600">category : string</text>
+    <text class="field" x="58" y="630">price : decimal</text>
+    <text class="field" x="58" y="660">stock : int</text>
+  </g>
+
+  <g aria-label="CART entity">
+    <rect class="card" x="440" y="470" width="300" height="170" rx="6"/>
+    <path class="header" d="M446 470 H734 Q740 470 740 476 V510 H440 V476 Q440 470 446 470 Z"/>
+    <text class="entity" x="458" y="497">CART</text>
+    <text class="field" x="458" y="540"><tspan class="key">PK</tspan><tspan>  id : int</tspan></text>
+    <text class="field" x="458" y="570"><tspan class="key">FK</tspan><tspan>  user_id : int</tspan></text>
+    <text class="field" x="458" y="600"><tspan class="key">FK</tspan><tspan>  product_id : int</tspan></text>
+    <text class="field" x="458" y="630">quantity : int</text>
+  </g>
+
+  <g aria-label="REVIEWS entity">
+    <rect class="card" x="870" y="470" width="290" height="200" rx="6"/>
+    <path class="header" d="M876 470 H1154 Q1160 470 1160 476 V510 H870 V476 Q870 470 876 470 Z"/>
+    <text class="entity" x="888" y="497">REVIEWS</text>
+    <text class="field" x="888" y="540"><tspan class="key">PK</tspan><tspan>  id : int</tspan></text>
+    <text class="field" x="888" y="570"><tspan class="key">FK</tspan><tspan>  user_id : int</tspan></text>
+    <text class="field" x="888" y="600"><tspan class="key">FK</tspan><tspan>  product_id : int</tspan></text>
+    <text class="field" x="888" y="630">rating : int</text>
+    <text class="field" x="888" y="660">comment : string</text>
+  </g>
+</svg>

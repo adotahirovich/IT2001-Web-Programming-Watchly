@@ -1,0 +1,32 @@
+<section id="page-register" class="page-section d-none">
+            <div class="row justify-content-center py-4">
+                <div class="col-md-6">
+                    <div class="card border-0 shadow-lg p-4">
+                        <div class="text-center mb-4">
+                            <i class="fa-solid fa-user-plus fs-1 text-warning"></i>
+                            <h3 class="fw-bold mt-2">Create Your Account</h3>
+                            <p class="text-muted small">Create an account for faster checkout and order tracking</p>
+                        </div>
+                        <form id="register-form" onsubmit="handleRegister(event)">
+                            <div class="mb-3">
+                                <label class="form-label">Full name</label>
+                                <input type="text" class="form-control" id="reg-name" placeholder="Alex Morgan" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Email address</label>
+                                <input type="email" class="form-control" id="reg-email" placeholder="alex@example.com" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Password</label>
+                                <input type="password" class="form-control" id="reg-password" placeholder="At least 6 characters" minlength="6" required>
+                            </div>
+                            <button type="submit" class="btn btn-warning w-100 py-2 fw-bold">Create Account</button>
+                        </form>
+                        <hr class="my-4">
+                        <div class="text-center">
+                            <p class="small text-muted mb-0">Already have an account? <a href="#" onclick="showPage('login')" class="text-dark text-decoration-none fw-bold">Log in</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>

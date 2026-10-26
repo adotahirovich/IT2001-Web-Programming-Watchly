@@ -1,0 +1,41 @@
+<section id="page-cart" class="page-section d-none">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h2 class="fw-bold mb-1"><i class="fa-solid fa-cart-shopping me-2 text-warning"></i>Shopping Cart</h2>
+            <p class="text-muted mb-0">Review your items before completing checkout.</p>
+        </div>
+        <button class="btn btn-outline-dark" onclick="showPage('products')">Continue Shopping</button>
+    </div>
+
+    <div id="cart-empty" class="alert alert-light border text-center py-5">
+        <i class="fa-solid fa-basket-shopping fs-1 text-secondary mb-3"></i>
+        <h5>Your cart is empty</h5>
+        <button class="btn btn-warning mt-2" onclick="showPage('products')">Browse Products</button>
+    </div>
+
+    <div id="cart-content" class="card border-0 shadow-sm d-none">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table align-middle">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Product</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                            <th>Subtotal</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody id="cart-items"></tbody>
+                </table>
+            </div>
+            <div class="d-flex flex-column flex-sm-row justify-content-between align-items-sm-center gap-3 border-top pt-3">
+                <button class="btn btn-outline-danger" onclick="clearCart()">Empty Cart</button>
+                <div class="text-sm-end">
+                    <p class="fs-5 fw-bold mb-2">Total: <span id="cart-total">0.00 EUR</span></p>
+                    <button class="btn btn-warning fw-bold" onclick="checkoutCart()">Complete Checkout</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

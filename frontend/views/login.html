@@ -1,0 +1,28 @@
+<section id="page-login" class="page-section d-none">
+            <div class="row justify-content-center py-4">
+                <div class="col-md-5">
+                    <div class="card border-0 shadow-lg p-4">
+                        <div class="text-center mb-4">
+                            <i class="fa-regular fa-user-circle fs-1 text-warning"></i>
+                            <h3 class="fw-bold mt-2">Log in to Watchly</h3>
+                            <p class="text-muted small">Enter your account details</p>
+                        </div>
+                        <form id="login-form" onsubmit="handleLogin(event)">
+                            <div class="mb-3">
+                                <label class="form-label">Email address</label>
+                                <input type="email" class="form-control" id="login-email" placeholder="you@example.com" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Password</label>
+                                <input type="password" class="form-control" id="login-password" placeholder="******" required>
+                            </div>
+                            <button type="submit" class="btn btn-dark w-100 py-2 fw-bold">Log in</button>
+                        </form>
+                        <hr class="my-4">
+                        <div class="text-center">
+                            <p class="small text-muted mb-0">Don't have an account? <a href="#" onclick="showPage('register')" class="text-warning text-decoration-none fw-bold">Register</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
