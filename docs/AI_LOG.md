@@ -9,7 +9,7 @@
 - AI was used as a helper, while the project structure and implementation were reviewed and adjusted manually.
 
 ### Example prompts
-- "Check if my project structure and frontend are okay for Milestone 1."
+- "Check if my project structur and frontend are okay for Milestone 1."
 - "Compare my project with the project requirements and tell me if it is ready to submit."
 - "Help me write the AI usage log in simple language."
 

@@ -1,7 +1,5 @@
 /**
- * Watchly SPA controller — Milestone 1 frontend demo.
- * Views are loaded from frontend/views/. Authentication is demo-only and uses localStorage.
- * Do not use this frontend-only authentication for a real application.
+ * frontend demo.
  */
 
 const viewCache = new Map();
@@ -77,8 +75,6 @@ async function showPage(pageId) {
             viewCache.set(pageId, await response.text());
         }
 
-        // Each template originally carried d-none because it used to live inline in index.html.
-        // Remove it after injecting the template, otherwise the whole page stays invisible.
         appView.innerHTML = viewCache.get(pageId).replace(
             /(<section\b[^>]*\bclass=["'][^"']*)\bd-none\s*/i,
             '$1'
@@ -117,7 +113,6 @@ function renderRoleNavigation() {
     }
 }
 
-// Kept for compatibility with any existing links, but role is no longer manually selectable.
 function switchRole(role) {
     if (role === 'admin') {
         window.location.href = `${window.location.pathname}?admin=1`;

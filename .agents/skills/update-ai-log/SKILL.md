@@ -1,3 +1,9 @@
+---
+name: update-ai-log
+description: "Use when updating or documenting AI use in docs/AI_LOG.md for a project milestone."
+user-invocable: true
+---
+
 # Update AI Log
 
 1. Open docs/AI_LOG.md.
@@ -7,3 +13,4 @@
 5. Record mistakes only when they actually happened.
 6. Never invent prompts, tools or mistakes.
 7. Show the proposed entry and ask for confirmation before saving.
+8. Keep replies short, direct and focused on the request. Avoid unnecessary explanations.

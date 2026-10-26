@@ -6,7 +6,7 @@ $configPath = __DIR__ . '/config.php';
 if (!file_exists($configPath)) {
     http_response_code(500);
     header('Content-Type: application/json; charset=utf-8');
-    echo json_encode(['message' => 'Nedostaje backend/config/config.php. Kopiraj config.example.php u config.php i podesi bazu.']);
+    echo json_encode(['message' => 'Nedostaje backend/config/config.php.']);
     exit;
 }
 $config = require $configPath;
