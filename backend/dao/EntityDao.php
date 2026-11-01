@@ -19,11 +19,7 @@ class EntityDao extends BaseDao
             'columns' => ['name', 'category', 'price', 'stock'],
         ],
         'cart' => [
-            'table' => 'carts',
-            'columns' => ['user_id', 'product_id', 'quantity'],
-        ],
-        'carts' => [
-            'table' => 'carts',
+            'table' => 'cart',
             'columns' => ['user_id', 'product_id', 'quantity'],
         ],
         'orders' => [

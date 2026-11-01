@@ -36,19 +36,19 @@ CREATE TABLE IF NOT EXISTS products (
     KEY idx_products_category (category)
 ) ENGINE=InnoDB;
 
-CREATE TABLE IF NOT EXISTS carts (
+CREATE TABLE IF NOT EXISTS cart (
     id INT UNSIGNED NOT NULL AUTO_INCREMENT,
     user_id INT UNSIGNED NOT NULL,
     product_id INT UNSIGNED NOT NULL,
     quantity INT UNSIGNED NOT NULL DEFAULT 1,
     PRIMARY KEY (id),
-    UNIQUE KEY uq_carts_user_product (user_id, product_id),
-    KEY idx_carts_product_id (product_id),
-    CONSTRAINT fk_carts_user
+    UNIQUE KEY uq_cart_user_product (user_id, product_id),
+    KEY idx_cart_product_id (product_id),
+    CONSTRAINT fk_cart_user
         FOREIGN KEY (user_id) REFERENCES users (id)
         ON UPDATE CASCADE
         ON DELETE CASCADE,
-    CONSTRAINT fk_carts_product
+    CONSTRAINT fk_cart_product
         FOREIGN KEY (product_id) REFERENCES products (id)
         ON UPDATE CASCADE
         ON DELETE CASCADE
@@ -103,7 +103,7 @@ INSERT IGNORE INTO products (id, name, category, price, stock) VALUES
     (2, 'Gold Luxury Diver', 'Satovi', 890.00, 3),
     (3, 'Diamond Silver Necklace', 'Nakit', 120.00, 25);
 
-INSERT IGNORE INTO carts (id, user_id, product_id, quantity) VALUES
+INSERT IGNORE INTO cart (id, user_id, product_id, quantity) VALUES
     (1, 2, 1, 1);
 
 INSERT IGNORE INTO orders (id, user_id, total, status, items_json) VALUES
