@@ -11,5 +11,6 @@ return [
     ],
     'jwt_secret' => 'CHANGE_THIS_TO_A_LONG_RANDOM_SECRET',
     'external_api_timeout' => 5,
-    'external_api_base' => 'https://api.frankfurter.dev/v1',
+    'external_api_base' => 'https://v6.exchangerate-api.com/v6',
+    'external_api_key' => '',
 ];
