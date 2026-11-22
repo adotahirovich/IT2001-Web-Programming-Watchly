@@ -17,7 +17,7 @@ Flight::set('config', $config);
 Flight::set('db', $pdo);
 Flight::set('logger', $logger);
 
-require __DIR__ . '/middleware/Middleware.php';
+require_once __DIR__ . '/middleware/Middleware.php';
 require __DIR__ . '/routes/api.php';
 
 Flight::start();

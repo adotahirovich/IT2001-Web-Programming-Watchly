@@ -111,6 +111,10 @@ final class AuthMiddleware
             }
         }
 
-        return $_SERVER['HTTP_AUTHORIZATION'] ?? null;
+        return $_SERVER['HTTP_AUTHORIZATION']
+            ?? $_SERVER['REDIRECT_HTTP_AUTHORIZATION']
+            ?? $_SERVER['REDIRECT_REDIRECT_HTTP_AUTHORIZATION']
+            ?? getenv('HTTP_AUTHORIZATION')
+            ?: null;
     }
 }

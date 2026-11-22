@@ -539,17 +539,34 @@ paths:
   /api/exchange-rate:
     get:
       tags: [External API]
-      summary: Retrieve the current EUR to BAM rate from ExchangeRate-API
-      description: Requires an API key stored in backend/config/config.php and times out after the configured limit.
+      summary: Convert an amount using the Freecurrencyapi.com provider
+      description: Requires a Freecurrencyapi.com API key stored in the ignored backend/config/config.php file. Requests use the configured timeout. The key is sent only from the backend.
+      parameters:
+        - name: base
+          in: query
+          required: false
+          schema: { type: string, pattern: '^[A-Za-z]{3}$', default: EUR }
+          description: Three-letter source currency code
+        - name: quote
+          in: query
+          required: false
+          schema: { type: string, pattern: '^[A-Za-z]{3}$', default: EUR }
+          description: Three-letter target currency code
+        - name: amount
+          in: query
+          required: false
+          schema: { type: number, minimum: 0, default: 1 }
+          description: Amount to convert
       responses:
         '200':
-          description: Exchange rate received
+          description: Exchange rate and converted amount received
           content:
             application/json:
               schema: { $ref: '#/components/schemas/ExchangeRate' }
+        '400': { $ref: '#/components/responses/BadRequest' }
+        '500': { $ref: '#/components/responses/ServerError' }
         '502': { $ref: '#/components/responses/BadGateway' }
         '503': { $ref: '#/components/responses/ServiceUnavailable' }
-        '500': { $ref: '#/components/responses/ServerError' }
 components:
   securitySchemes:
     bearerAuth:
@@ -585,7 +602,7 @@ components:
       type: object
       required: [name]
       properties:
-        name: { type: string, enum: [admin, customer] }
+        name: { type: string, minLength: 1, maxLength: 30, description: Role name must be unique. }
     AdminUserInput:
       type: object
       required: [name, email, password, role_id]
@@ -711,9 +728,11 @@ components:
       type: object
       properties:
         base: { type: string, example: EUR }
-        quote: { type: string, example: BAM }
+        quote: { type: string, example: USD }
+        amount: { type: number, example: 100 }
         rate: { type: number }
-        updated_at: { type: string }
+        converted_amount: { type: number }
+        date: { type: string, format: date }
   responses:
     BadRequest:
       description: Invalid request data

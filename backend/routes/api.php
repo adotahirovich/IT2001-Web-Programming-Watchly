@@ -91,7 +91,16 @@ Flight::route('POST /api/auth/login', static function () use ($handle, $authServ
 });
 
 Flight::route('GET /api/exchange-rate', static function () use ($handle, $exchangeRateService): void {
-    $handle(static fn(): array => [200, $exchangeRateService->euroToBam()]);
+    $handle(static function () use ($exchangeRateService): array {
+        $base = (string) ($_GET['base'] ?? 'EUR');
+        $quote = (string) ($_GET['quote'] ?? 'EUR');
+        $rawAmount = $_GET['amount'] ?? '1';
+        if (!is_scalar($rawAmount) || !is_numeric((string) $rawAmount)) {
+            throw new ApiException('Amount must be a non-negative number.', 400);
+        }
+
+        return [200, $exchangeRateService->convert($base, $quote, (float) $rawAmount)];
+    });
 });
 
 Flight::route('GET /api/@entity', static function (string $entity) use ($handle, $services): void {
