@@ -5,6 +5,8 @@ const CART_KEY = 'watchly_demo_cart';
 const ORDERS_KEY = 'watchly_demo_orders';
 let currentRole = 'guest';
 let currentUser = null;
+let exchangeRateResult = null;
+let exchangeRequestId = 0;
 
 const validPages = ['home', 'products', 'cart', 'external-api', 'login', 'register', 'orders', 'admin'];
 
@@ -77,10 +79,8 @@ async function showPage(pageId) {
             viewCache.set(pageId, await response.text());
         }
 
-        appView.innerHTML = viewCache.get(pageId).replace(
-            /(<section\b[^>]*\bclass=["'][^"']*)\bd-none\s*/i,
-            '$1'
-        );
+        appView.innerHTML = viewCache.get(pageId);
+        appView.querySelector(`#page-${pageId}`)?.classList.remove('d-none');
 
         document.querySelectorAll('.nav-item-link').forEach(link => link.classList.remove('active'));
         const activeNav = document.getElementById(`nav-${pageId}`);
@@ -89,6 +89,11 @@ async function showPage(pageId) {
         renderRoleNavigation();
         if (pageId === 'cart') renderCart();
         if (pageId === 'orders') renderOrders();
+        if (pageId === 'products') applyExchangeRateToProductPrices();
+        if (pageId === 'external-api') {
+            const currency = document.getElementById('currency-select')?.value || 'EUR';
+            convertPrices(currency);
+        }
         window.scrollTo(0, 0);
     } catch (error) {
         console.error(`Could not load view "${pageId}":`, error);
@@ -408,11 +413,88 @@ function escapeHtml(value) {
 function convertPrices(currency) {
     const statusBox = document.getElementById('currency-status');
     if (!statusBox) return;
-    if (currency === 'EUR') {
-        statusBox.innerHTML = '<i class="fa-solid fa-info-circle me-1"></i> Base currency: EUR. Live exchange rates will be connected in a later milestone.';
+    const requestId = ++exchangeRequestId;
+    const amountInput = document.getElementById('currency-amount');
+    const amount = Number(amountInput?.value);
+    if (!Number.isFinite(amount) || amount < 0) {
+        exchangeRateResult = null;
+        applyExchangeRateToProductPrices();
+        statusBox.className = 'alert alert-danger mb-0';
+        statusBox.textContent = 'Enter a valid amount greater than or equal to zero.';
         return;
     }
-    statusBox.innerHTML = `<i class="fa-solid fa-info-circle me-1"></i> Selected currency: <strong>${currency}</strong>. This is a UI demo; live rates are not connected yet.`;
+
+    statusBox.className = 'alert alert-info mb-0';
+    statusBox.textContent = 'Loading the latest exchange rate…';
+
+    const url = new URL('../backend/api/exchange-rate', window.location.href);
+    url.search = new URLSearchParams({
+        base: 'EUR',
+        quote: currency,
+        amount: String(amount)
+    }).toString();
+
+    fetch(url)
+        .then(async response => {
+            let result;
+            try {
+                result = await response.json();
+            } catch (error) {
+                throw new Error('The exchange-rate service returned an unreadable response.');
+            }
+            if (!response.ok) {
+                throw new Error(result.message || `Exchange-rate request failed (HTTP ${response.status}).`);
+            }
+            if (
+                !result ||
+                result.base !== 'EUR' ||
+                result.quote !== currency ||
+                !Number.isFinite(Number(result.rate)) ||
+                !Number.isFinite(Number(result.converted_amount)) ||
+                typeof result.date !== 'string'
+            ) {
+                throw new Error('The exchange-rate service returned incomplete conversion data.');
+            }
+            return result;
+        })
+        .then(result => {
+            if (requestId !== exchangeRequestId || !document.getElementById('currency-status')) return;
+            exchangeRateResult = result;
+            statusBox.className = 'alert alert-success mb-0';
+            statusBox.textContent =
+                `${formatCurrency(result.amount, 'EUR')} = ${formatCurrency(result.converted_amount, currency)} ` +
+                `(1 EUR = ${formatCurrency(result.rate, currency)}; rate date: ${result.date}).`;
+            applyExchangeRateToProductPrices();
+        })
+        .catch(error => {
+            if (requestId !== exchangeRequestId || !document.getElementById('currency-status')) return;
+            console.error('Could not load exchange rate:', error);
+            exchangeRateResult = null;
+            applyExchangeRateToProductPrices();
+            statusBox.className = 'alert alert-danger mb-0';
+            statusBox.textContent = `Currency conversion is unavailable: ${error.message}`;
+        });
+}
+
+function formatCurrency(amount, currency) {
+    return new Intl.NumberFormat(undefined, {
+        style: 'currency',
+        currency,
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+    }).format(Number(amount));
+}
+
+function applyExchangeRateToProductPrices() {
+    document.querySelectorAll('.product-price[data-base-price]').forEach(priceElement => {
+        const basePrice = Number(priceElement.dataset.basePrice);
+        if (Number.isFinite(basePrice)) {
+            const convertedPrice = exchangeRateResult
+                ? formatCurrency(basePrice * Number(exchangeRateResult.rate), exchangeRateResult.quote)
+                : formatCurrency(basePrice, 'EUR');
+            priceElement.textContent = convertedPrice;
+        }
+    });
 }
 
 function openAddProductModal() {

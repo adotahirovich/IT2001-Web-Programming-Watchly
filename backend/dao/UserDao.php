@@ -9,4 +9,15 @@ final class UserDao extends EntityDao
     {
         parent::__construct($pdo, 'users');
     }
+
+    public function findByEmail(string $email): ?array
+    {
+        $statement = $this->pdo->prepare(
+            'SELECT * FROM `users` WHERE `email` = :email LIMIT 1'
+        );
+        $statement->execute(['email' => $email]);
+        $row = $statement->fetch(PDO::FETCH_ASSOC);
+
+        return $row === false ? null : $row;
+    }
 }

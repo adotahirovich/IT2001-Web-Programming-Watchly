@@ -9,4 +9,15 @@ final class RoleDao extends EntityDao
     {
         parent::__construct($pdo, 'roles');
     }
+
+    public function findByName(string $name): ?array
+    {
+        $statement = $this->pdo->prepare(
+            'SELECT * FROM `roles` WHERE `name` = :name LIMIT 1'
+        );
+        $statement->execute(['name' => $name]);
+        $row = $statement->fetch(PDO::FETCH_ASSOC);
+
+        return $row === false ? null : $row;
+    }
 }

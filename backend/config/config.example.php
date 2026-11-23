@@ -11,5 +11,6 @@ return [
     ],
     'jwt_secret' => 'CHANGE_THIS_TO_A_LONG_RANDOM_SECRET',
     'external_api_timeout' => 5,
-    'external_api_base' => 'https://api.frankfurter.dev/v1',
+    'external_api_base' => 'https://api.freecurrencyapi.com/v1',
+    'external_api_key' => 'ADD_YOUR_FREECURRENCYAPI_KEY_HERE',
 ];
